@@ -65,7 +65,7 @@ from keras.optimizers import Adam
 ```python
 # Assuming num_words and max_sequence_length are defined
 model = Sequential()
-model.add(Embedding(input_dim=num_words, output_dim=500, input_length=max_sequence_length, trainable=True))
+model.add(Embedding(input_dim=10000, output_dim=200, input_length=max_sequence_length))
 ```
 3. 1D convolutional beural network are used in NLP, as they work well with sequential data, as is the case in NLP. 
 ```python
@@ -73,19 +73,16 @@ model.add(Embedding(input_dim=num_words, output_dim=500, input_length=max_sequen
 model.add(Conv1D(filters=128, kernel_size=5, activation='relu'))
 model.add(MaxPooling1D(pool_size=2))
 ```
-4.
+3.
 ```python
-# Use Bidirectional LSTM
-model.add(Bidirectional(LSTM(128, return_sequences=True, dropout=0.2, recurrent_dropout=0.2)))
-model.add(Bidirectional(LSTM(256, dropout=0.2, recurrent_dropout=0.2)))
+# Use LSTM
+model.add(LSTM(128, return_sequences=True, dropout=0.2))
+model.add(LSTM(512, dropout=0.2))
 ```
 5.
 ```python
 # Add more Dense layers with regularization
-model.add(Dense(1024, activation='relu', kernel_regularizer='l2'))
-model.add(Dropout(0.5))
-model.add(Dense(256, activation='relu', kernel_regularizer='l2'))
-model.add(Dropout(0.5))
+model.add(Dense(1024, activation='relu'))
 model.add(Dense(64, activation='relu'))
 ```
 6.
@@ -94,6 +91,5 @@ model.add(Dense(64, activation='relu'))
 model.add(Dense(2, activation='softmax'))
 
 # Compile model with a different optimizer and learning rate
-optimizer = Adam(learning_rate=1e-4)
-model.compile(loss='sparse_categorical_crossentropy', optimizer=optimizer, metrics=['accuracy'])
+model.compile(loss='sparse_categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 ```
