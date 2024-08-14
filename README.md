@@ -17,6 +17,10 @@ Then, the following steps were as listed:
 After sudying the problem's DF it was essential to start building the DL model from the information presented in the last section. Tensorflow and Keras was used to build this model, as Keras provides an user-friendly interface to work with TensorFlow.
 
 - Using padding as it is common in NLP DL models to get a uniform input size, efficient batch processing, and compatibility with libraries.
+
+
+## DL model
+
 ### Bidirectional LSTM with Conv1D Model
 
 This Python script builds and trains a sequential model using Keras, incorporating an embedding layer, convolutional layers, bidirectional LSTM layers, and dense layers with dropout for regularization.
@@ -88,6 +92,9 @@ model.add(Dense(64, activation='relu'))
 6.
 ```python
 # Final output layer
+
+
+
 model.add(Dense(2, activation='softmax'))
 
 # Compile model with a different optimizer and learning rate
